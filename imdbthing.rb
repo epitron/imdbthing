@@ -44,7 +44,11 @@ class Array
           "<#{color}>#{"#" * pounds}</#{color}>"
         end.join.colorize
       else
-        pounds = (v.size*scale).round
+      	if v
+          pounds = (v.size*scale).round
+        else
+          pounds = 0
+        end
         v = "#" * pounds
       end
       
@@ -164,12 +168,12 @@ class Movies
   
   def save!
     print "* Saving #{movies.size} movies to #{@@db.filename}: "
-    bench { @@db.write Marshal.dump(movies) }
+    time { @@db.write Marshal.dump(movies) }
   end
   
   def load!
     print "* Loading #{@@db.filename}:"
-    bench { self.movies = Marshal.load(@@db.read) }
+    time { self.movies = Marshal.load(@@db.read) }
     puts "  |_ #{movies.size} movies"
   end
   
