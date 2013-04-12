@@ -23,5 +23,6 @@ Run:
   pry(#<Movies>)> movies.histo { title =~ /Love/ }
 
 If you want to add more movie studios, edit the COMPANIES
-table at the top of imdbthing.rb, then just re-run the
-script. It'll automatically scrape the added companies.
+table at the top of imdbthing.rb, delete movies.dump,
+then re-run the script. It'll automatically re-scrape all
+the companies (the previously scraped ones will be cached).

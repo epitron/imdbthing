@@ -11,14 +11,21 @@ COMPANIES = {
   "TriStar"       => "http://www.imdb.com/company/co0005883/",
   "Working Title" => "http://www.imdb.com/company/co0057311/",
   "MGM"           => "http://www.imdb.com/company/co0016037/",
+  "MGM Corp"      => "http://www.imdb.com/company/co0108601/",
   "Warner"        => "http://www.imdb.com/company/co0026840/",
-  "Columbia"      => "http://www.imdb.com/company/co0050868/",
   "Fox"           => "http://www.imdb.com/company/co0000756/",
   "THINKfilm"     => "http://www.imdb.com/company/co0209877/",
-  "Sony"          => "http://www.imdb.com/company/co0137851/",
+  "Focus"         => "http://www.imdb.com/company/co0042399/",
+  "Samuel Goldwyn"=> "http://www.imdb.com/company/co0058013/",
+  "Magnolia"      => "http://www.imdb.com/company/co0134717/",
+  "TWC"           => "http://www.imdb.com/company/co0150452/",
+  #"Sony Home"          => "http://www.imdb.com/company/co0137851/",
+  "Sony"          => "http://www.imdb.com/company/co0110101/",
   "DreamWorks"    => "http://www.imdb.com/company/co0040938/",
   "Happy Madison" => "http://www.imdb.com/company/co0059609/",
   "Mandate"       => "http://www.imdb.com/company/co0142446/",
+  "Columbia Corp" => "http://www.imdb.com/company/co0050868/",
+  "Columbia Pictures" => "http://www.imdb.com/company/co0071509/",
   "Fox Searchlight"   => "http://www.imdb.com/company/co0028932/",
   "Paramount Vantage" => "http://www.imdb.com/company/co0179341/",
 }
@@ -190,7 +197,7 @@ class Movies
 
       page.search("td ol li").map do |e|
 
-        if e.text =~ /^(.+) \((\d+)\) \.\.\.\s+(Distributor|Production)/
+        if e.text =~ /^([^"].+[^"]) \((\d+)(?:\/\w+)?\) \.\.\.\s+(Distributor|Production)/
           url = e.at("a")["href"]
           url = "http://www.imdb.com#{url}" if url
           Movie.new(title=$1, year=$2.to_i, url, company, role=@@rolemap[$3])
