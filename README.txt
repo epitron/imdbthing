@@ -4,14 +4,17 @@ Install gems:
   $ gem install epitools
   $ gem install pry
   $ gem install mechanize -v 1.0
-  $ gem install print_members
+
+Or:
+  $ bundle
 
 == USE IT =======================================
 
 Run:
   $ ruby imdbthing.rb
 
-  pry> ls
-  pry> mgm.print
-  pry> mgm.query { year == 1975 }.print
-  pry> movies.histo { title =~ /Love/ }
+  pry(#<Movies>)> ls
+  pry(#<Movies>)> warner.print
+  pry(#<Movies>)> mgm.query { year == 1975 }.print
+  pry(#<Movies>)> timeline
+  pry(#<Movies>)> movies.histo { title =~ /Love/ }
