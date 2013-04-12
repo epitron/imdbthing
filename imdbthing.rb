@@ -3,6 +3,26 @@ require 'epitools'
 require 'pry'
 require 'curses'
 
+COMPANIES = {
+  "Film District" => "http://www.imdb.com/company/co0314851/",
+  "Universal"     => "http://www.imdb.com/company/co0005073/",
+  "Paramount"     => "http://www.imdb.com/company/co0023400/",
+  "Touchstone"    => "http://www.imdb.com/company/co0049348/",
+  "TriStar"       => "http://www.imdb.com/company/co0005883/",
+  "Working Title" => "http://www.imdb.com/company/co0057311/",
+  "MGM"           => "http://www.imdb.com/company/co0016037/",
+  "Warner"        => "http://www.imdb.com/company/co0026840/",
+  "Columbia"      => "http://www.imdb.com/company/co0050868/",
+  "Fox"           => "http://www.imdb.com/company/co0000756/",
+  "THINKfilm"     => "http://www.imdb.com/company/co0209877/",
+  "Sony"          => "http://www.imdb.com/company/co0137851/",
+  "DreamWorks"    => "http://www.imdb.com/company/co0040938/",
+  "Happy Madison" => "http://www.imdb.com/company/co0059609/",
+  "Mandate"       => "http://www.imdb.com/company/co0142446/",
+  "Fox Searchlight"   => "http://www.imdb.com/company/co0028932/",
+  "Paramount Vantage" => "http://www.imdb.com/company/co0179341/",
+}
+
 class String
   def slug; downcase.gsub(/\s+/, "_"); end
 end
@@ -131,29 +151,9 @@ class Movies
 
   @@db = Path["movies.dump"]
 
-  @@companies = {
-    "Film District" => "http://www.imdb.com/company/co0314851/",
-    "Universal"     => "http://www.imdb.com/company/co0005073/",
-    "Paramount"     => "http://www.imdb.com/company/co0023400/",
-    "Touchstone"    => "http://www.imdb.com/company/co0049348/",
-    "TriStar"       => "http://www.imdb.com/company/co0005883/",
-    "Working Title" => "http://www.imdb.com/company/co0057311/",
-    "MGM"           => "http://www.imdb.com/company/co0016037/",
-    "Warner"        => "http://www.imdb.com/company/co0026840/",
-    "Columbia"      => "http://www.imdb.com/company/co0050868/",
-    "Fox"           => "http://www.imdb.com/company/co0000756/",
-    "THINKfilm"     => "http://www.imdb.com/company/co0209877/",
-    "Sony"          => "http://www.imdb.com/company/co0137851/",
-    "DreamWorks"    => "http://www.imdb.com/company/co0040938/",
-    "Happy Madison" => "http://www.imdb.com/company/co0059609/",
-    "Mandate"       => "http://www.imdb.com/company/co0142446/",
-    "Fox Searchlight"   => "http://www.imdb.com/company/co0028932/",
-    "Paramount Vantage" => "http://www.imdb.com/company/co0179341/",
-  }
-
   @@rolemap = {"Distributor" => :dist, "Production" => :prod}
 
-  @@companies.keys.each do |key|
+  COMPANIES.keys.each do |key|
     define_method(key.slug) do
       query {|m| m.company == key }
     end
@@ -183,7 +183,7 @@ class Movies
   def scrape!
     b = Browser.new
 
-    self.movies = @@companies.map do |company, url|
+    self.movies = COMPANIES.map do |company, url|
 
       puts "== #{company} ========================================="
       page = b.get(url)
