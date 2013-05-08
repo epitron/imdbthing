@@ -23,6 +23,7 @@ COMPANIES = {
   "Sony"          => "http://www.imdb.com/company/co0110101/",
   "DreamWorks"    => "http://www.imdb.com/company/co0040938/",
   "Happy Madison" => "http://www.imdb.com/company/co0059609/",
+  "Summit"        => "http://www.imdb.com/company/co0046206/",
   "Mandate"       => "http://www.imdb.com/company/co0142446/",
   "Columbia Corp" => "http://www.imdb.com/company/co0050868/",
   "Columbia Pictures" => "http://www.imdb.com/company/co0071509/",
