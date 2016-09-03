@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 require 'epitools'
 require 'pry'
-require 'curses'
 
 COMPANIES = {
   "Film District" => "http://www.imdb.com/company/co0314851/",
@@ -56,7 +55,7 @@ class Array
     biggest       = grouped.values.map(&:size).max
     biggest_key   = grouped.keys.map(&:size).max
     scale         = 1.0
-    width         = Curses.cols.to_f - biggest_key - 2
+    width         = Term.width.to_f - biggest_key - 2
     scale         = width / biggest if biggest > width
 
     if colorize
@@ -189,7 +188,7 @@ class Movies
   end
 
   def scrape!
-    b = Browser.new
+    b = Browser.new(cache: true)
 
     self.movies = COMPANIES.map do |company, url|
 

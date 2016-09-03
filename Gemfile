@@ -1,3 +1,5 @@
+source 'https://rubygems.org'
 gem 'pry'
 gem 'epitools'
-gem 'mechanize', '1.0'
+gem 'mechanize'
+gem 'sqlite3'
